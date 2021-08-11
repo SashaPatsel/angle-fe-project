@@ -4,6 +4,7 @@ import { Container, Row, Col, Table, Button, Card } from 'react-bootstrap';
 import NewMemberModal from './NewMemberModal';
 
 const App = () => {
+  // Add Member Modal
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
