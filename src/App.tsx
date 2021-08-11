@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Container, Row, Col, Table, Button, Card } from 'react-bootstrap';
+import NewMemberModal from './NewMemberModal';
 
-function App() {
+const App = () => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="py-5">
+      <NewMemberModal showModal={showModal} setShowModal={setShowModal} />
+      <Row>
+        <Col>
+          <Card className="pb-0">
+            <Card.Header className="mb-1 py-3 d-flex justify-content-between align-items-center">
+              <h4>Members</h4>
+              <Button onClick={() => setShowModal(true)}>Add Member</Button>
+            </Card.Header>
+            <Table hover className="my-0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Member ID</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name placeholder</td>
+                  <td>id placeholder</td>
+                  <td>email placeholder</td>
+                  <td>phone placeholder</td>
+                </tr>
+              </tbody>
+            </Table>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
-}
+};
 
 export default App;
