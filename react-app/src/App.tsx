@@ -7,7 +7,17 @@ import API from "./utils/API";
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
-
+  useEffect(() => {
+    API.getAllMembers()
+    .then(res => {
+      console.log("Allmembers", res)
+    })
+    
+    API.getMember(1)
+    .then(res => {
+      console.log("res", res)
+    })
+  }, [])
 
   return (
     <Container className="py-5">
