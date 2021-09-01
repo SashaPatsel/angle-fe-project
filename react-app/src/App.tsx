@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Container, Button } from 'react-bootstrap';
 import NewMemberModal from './NewMemberModal';
+import API from "./utils/API";
 
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
+
+
 
   return (
     <Container className="py-5">
