@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from "react-bootstrap";
 import API from "../utils/FakeAPI";
+// import fAPI from "../utils/API";
 
 const Members = () => {
 
@@ -10,6 +11,11 @@ const Members = () => {
        const allMembers = API.getAllMembers()
         console.log(allMembers)
         setMembers(allMembers)
+
+        // fAPI.getAllMembers()
+        // .then(res => {
+        //     console.log("res", res)
+        // })
       }, [])
  
     return (
@@ -26,8 +32,8 @@ const Members = () => {
                     {members.map((member: any) => (
                     <tr>
                         <td>{member.first_name} {member.last_name}</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
+                        <td>{member.email}</td>
+                        <td>{member.phone}</td>
                     </tr>
                     ))}
                 </tbody>
