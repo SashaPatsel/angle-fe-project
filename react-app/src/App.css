@@ -41,3 +41,11 @@
 .searchbar {
     width: 40%;
 }
+
+/* Utilities */
+
+.u-functional:hover {
+  cursor: pointer;
+  transition: .2s;
+  transform: scale(1.05);
+}

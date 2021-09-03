@@ -14,6 +14,10 @@ const App = () => {
     setMembers(allMembers)
   }, [])
 
+  useEffect(() => {
+    console.log("effected")
+  }, [members])
+
   function processNewMember(member: any) {
     setMembers(API.createMember(member))
   }
@@ -21,6 +25,14 @@ const App = () => {
   function filterMembers(e: any) {
     const filteredMembers = API.filterMembers(e.target.value)
     setMembers(filteredMembers)
+  }
+
+  async function deleteMember(id:number) {
+    const allMembers = API.deleteMember(id)
+    console.log("allMembers", allMembers)
+    await setMembers([])
+    setMembers(allMembers)
+    console.log("members", members)
   }
 
   return (
@@ -32,7 +44,7 @@ const App = () => {
           <Form.Control placeholder="Search name, email, phone" onChange={filterMembers}/>
         </div>
       </div>
-      <Members members={members} />
+      <Members members={members} deleteMember={deleteMember}/>
     </Container>
   );
 };
