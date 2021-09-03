@@ -5,24 +5,23 @@ import API from "./utils/FakeAPI";
 interface NewMemberModalProps {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  processNewMember: any;
 }
 
 
 
-const NewMemberModal: React.FC<NewMemberModalProps> = ({ showModal, setShowModal }) => {
+const NewMemberModal: React.FC<NewMemberModalProps> = ({ showModal, setShowModal, processNewMember }) => {
 
   const [memberInfo, setMemberInfo] = useState<any>({});
 
   function handleChange(e: any) {
-    console.log("e", e)
-    console.log("name", e.target.name)
-    console.log("val", e.target.value)
     const {name, value} = e.target
     setMemberInfo({...memberInfo, [name]: value})
   }
 
   function addMember() {
-
+    processNewMember(memberInfo)
+    setShowModal(false)
   }
 
   return (

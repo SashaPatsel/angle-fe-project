@@ -3,14 +3,11 @@ import { Table } from "react-bootstrap";
 import API from "../utils/FakeAPI";
 // import fAPI from "../utils/API";
 
-const Members = () => {
+const MembersTable = ({members} : {members:any}) => {
 
-    const [members, setMembers] = useState<any | null>([]);
 
     useEffect(() => {
-       const allMembers = API.getAllMembers()
-        console.log(allMembers)
-        setMembers(allMembers)
+
 
         // fAPI.getAllMembers()
         // .then(res => {
@@ -42,4 +39,4 @@ const Members = () => {
     )
 }
 
-export default Members
+export default MembersTable
