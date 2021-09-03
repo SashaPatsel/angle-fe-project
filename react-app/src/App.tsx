@@ -14,9 +14,6 @@ const App = () => {
     setMembers(allMembers)
   }, [])
 
-  useEffect(() => {
-    console.log("effected")
-  }, [members])
 
   function processNewMember(member: any) {
     setMembers(API.createMember(member))
@@ -29,10 +26,8 @@ const App = () => {
 
   async function deleteMember(id:number) {
     const allMembers = API.deleteMember(id)
-    console.log("allMembers", allMembers)
     await setMembers([])
     setMembers(allMembers)
-    console.log("members", members)
   }
 
   return (

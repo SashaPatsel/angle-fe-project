@@ -6,10 +6,22 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 
 const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: any }) => {
-console.log("happened")
 
     function removeMember(id: number) {
         deleteMember(id)
+    }
+
+    function sortMembers() {
+
+        const sortedMembers = members.sort(function (a: any, b: any) {
+            console.log("A", a)
+            console.log("B", b)
+                if (a.first_name < b.first_name) { return -1; }
+                if (a.first_name > b.first_name) { return 1; }
+                return 0;
+            })
+            // = members.sort((a:any, b:any) => a.firstname.localeCompare(b.firstname))
+        console.log("SM", sortedMembers)
     }
 
     return (
@@ -22,7 +34,7 @@ console.log("happened")
                                 <div>
                                     Name
                                 </div>
-                                <div>
+                                <div onClick={sortMembers}>
                                     &#9650;
                                     {/* &#9660; */}
                                 </div>
