@@ -16,6 +16,8 @@ const App = () => {
 
 
   function processNewMember(member: any) {
+    const lastID = members[members.length - 1].member_id
+    member["member_id"] = lastID + 1
     setMembers(API.createMember(member))
   }
 

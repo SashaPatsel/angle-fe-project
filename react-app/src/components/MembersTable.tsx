@@ -10,6 +10,8 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
 
     const [displayMembers, setDisplayMembers] = useState<any | null>(members);
 
+    const [sortedColumns, setSortedColumns] = useState<any | null>({first_name: "descending", email: "descending"});
+
     useEffect(() => {
         setDisplayMembers(members)
     }, [members])
@@ -19,17 +21,23 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
     }
 
     async function sortMembers(arg: string) {
-        
+
+
         const sortedMembers = members.sort(function (a: any, b: any) {
 
-            console.log("A", a)
-            console.log("B", b)
-                if (a[arg] < b[arg]) { return -1; }
-                if (a[arg] > b[arg]) { return 1; }
-                return 0;
+        if (sortedColumns[arg] === "descending") {
+            setSortedColumns({...sortedColumns, [arg]: "ascending"})
+            if (a[arg] > b[arg]) { return -1; }
+            if (a[arg] < b[arg]) { return 1; }
+            return 0;
+        } else {
+            setSortedColumns({...sortedColumns, [arg]: "descending"})
+            if (a[arg] < b[arg]) { return -1; }
+            if (a[arg] > b[arg]) { return 1; }
+            return 0;
+        }
             })
-            // = members.sort((a:any, b:any) => a.firstname.localeCompare(b.firstname))
-        console.log("SM", sortedMembers)
+
         await setDisplayMembers([])
         setDisplayMembers(sortedMembers)
     }
@@ -45,8 +53,8 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                     Name
                                 </div>
                                 <div onClick={() => sortMembers("first_name")}>
-                                    &#9650;
-                                    {/* &#9660; */}
+                                &#9660;
+                                    {/* &#9650;*/}
                                 </div>
                             </div>
                         </th>
@@ -56,7 +64,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                     email
                                 </div>
                                 <div onClick={() => sortMembers("email")}>
-                                    &#9650;
+                                &#9660;
                                 </div>
                             </div>
                         </th>

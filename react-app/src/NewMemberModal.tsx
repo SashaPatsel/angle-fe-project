@@ -20,8 +20,8 @@ const NewMemberModal: React.FC<NewMemberModalProps> = ({ showModal, setShowModal
   }
 
   function addMember() {
-    processNewMember(memberInfo)
     setShowModal(false)
+    processNewMember(memberInfo)
   }
 
   return (
