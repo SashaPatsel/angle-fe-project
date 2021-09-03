@@ -16,7 +16,7 @@ const App = () => {
     .then(res => {
       console.log("res", res)
       setMembers(res.data)
-      setDisplayMembers(members)
+      setDisplayMembers(res.data)
     })
   }, [])
 
