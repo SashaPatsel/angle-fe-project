@@ -8,8 +8,15 @@ const API = {
         console.log("members", members)
         return members
     },
-    // changeMember: (id: number, data: object) => axios.put(`http://localhost:8000/api/members/${id}`, config), 
-    // partiallyChangeMember: (id: number) => axios.patch(`http://localhost:8000/api/members/${id}`, config), 
-    // deleteMember: (id: number) => axios.delete(`http://localhost:8000/api/members/${id}`, config),
+    filterMembers: (search: string) => {
+        const filteredMembers = []
+        for (let i = 0 ; i < members.length ; i++) {
+            const {phone, email, first_name, last_name} = members[i]
+            if (phone.includes(search) || email.includes(search) || first_name.includes(search) || last_name.includes(search)) {
+                filteredMembers.push(members[i])
+            }
+        }
+        return filteredMembers
+    }
 }
 export default API;

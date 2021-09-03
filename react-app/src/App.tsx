@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Form } from 'react-bootstrap';
 import NewMemberModal from './NewMemberModal';
 import API from "./utils/FakeAPI";
 import Members from './components/MembersTable';
@@ -11,20 +11,28 @@ const App = () => {
 
   useEffect(() => {
     const allMembers = API.getAllMembers()
-    console.log(allMembers)
     setMembers(allMembers)
   }, [])
 
   function processNewMember(member: any) {
-    console.log("member", member)
     setMembers(API.createMember(member))
+  }
+
+  function filterMembers(e: any) {
+    const filteredMembers = API.filterMembers(e.target.value)
+    setMembers(filteredMembers)
   }
 
   return (
     <Container className="py-5">
       <NewMemberModal showModal={showModal} setShowModal={setShowModal} processNewMember={processNewMember} />
-      <Button onClick={() => setShowModal(true)}>Add Member</Button>
-      <Members members={members}/>
+      <div className="d-flex justify-content-between">
+        <Button onClick={() => setShowModal(true)}>Add Member</Button>
+        <div className="searchbar" >
+          <Form.Control placeholder="Search name, email, phone" onChange={filterMembers}/>
+        </div>
+      </div>
+      <Members members={members} />
     </Container>
   );
 };
