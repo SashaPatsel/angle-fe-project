@@ -13,6 +13,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
     const [sortedColumns, setSortedColumns] = useState<any | null>({first_name: "descending", email: "descending"});
 
     useEffect(() => {
+        console.log("displayMembers", members)
         setDisplayMembers(members)
     }, [members])
 
