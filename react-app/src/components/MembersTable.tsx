@@ -7,11 +7,18 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: any }) => {
 
+
+    const [displayMembers, setDisplayMembers] = useState<any | null>(members);
+
+    useEffect(() => {
+        setDisplayMembers(members)
+    }, [members])
+
     function removeMember(id: number) {
         deleteMember(id)
     }
 
-    function sortMembers() {
+    async function sortMembers() {
 
         const sortedMembers = members.sort(function (a: any, b: any) {
             console.log("A", a)
@@ -22,6 +29,8 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
             })
             // = members.sort((a:any, b:any) => a.firstname.localeCompare(b.firstname))
         console.log("SM", sortedMembers)
+        await setDisplayMembers([])
+        setDisplayMembers(sortedMembers)
     }
 
     return (
@@ -64,7 +73,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                     </tr>
                 </thead>
                 <tbody>
-                    {members.map((member: any) => (
+                    {displayMembers.map((member: any) => (
                         <tr key={member.member_id}>
                             <td>{member.first_name} {member.last_name}</td>
                             <td>{member.email}</td>
