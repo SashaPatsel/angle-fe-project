@@ -2,7 +2,6 @@ import members from "../data/members";
 
 const API = {
     getAllMembers: () => members, 
-    // getMember: (id: number) => axios.get(`http://localhost:8000/api/members/${id}`, config), 
     createMember: (member: any) => {
         members.push(member)
         return members
@@ -20,7 +19,6 @@ const API = {
     deleteMember: (id: number) => {
         for (let i = 0 ; i < members.length ; i++) {
             const {member_id} = members[i]
-            console.log(member_id, id)
             if (member_id === id) {
                 members.splice(i, 1);
             }
