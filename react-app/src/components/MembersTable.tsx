@@ -13,7 +13,6 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
     const [sortedColumns, setSortedColumns] = useState<any | null>({first_name: "descending", email: "descending"});
 
     useEffect(() => {
-        console.log("displayMembers", members)
         setDisplayMembers(members)
     }, [members])
 
@@ -53,7 +52,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                 <div>
                                     Name
                                 </div>
-                                <div onClick={() => sortMembers("first_name")}>
+                                <div className="u-functional" onClick={() => sortMembers("first_name")}>
                                     {sortedColumns.first_name === "descending" ? <>&#9660;</>
                                     : <>&#9650;</>}
                                 
@@ -65,7 +64,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                 <div>
                                     email
                                 </div>
-                                <div onClick={() => sortMembers("email")}>
+                                <div className="u-functional" onClick={() => sortMembers("email")}>
                                 {sortedColumns.email === "descending" ? <>&#9660;</>
                                     : <>&#9650;</>}
                                 </div>

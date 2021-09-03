@@ -9,21 +9,19 @@ import API from "./utils/API"
 const App = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [members, setMembers] = useState<any | null>([]);
+  const [displayMembers, setDisplayMembers] = useState<any | null>(members);
 
   useEffect(() => {
     API.getAllMembers()
     .then(res => {
       console.log("res", res)
       setMembers(res.data)
+      setDisplayMembers(members)
     })
-    // const allMembers = API.getAllMembers()
   }, [])
 
 
   function processNewMember(member: any) {
-    // const lastID = members[members.length - 1].member_id
-    // member["member_id"] = lastID + 1
-    // setMembers(API.createMember(member))
     console.log("member", member)
     API.createMember(member)
     .then(async res => {
@@ -31,12 +29,20 @@ const App = () => {
       members.push(res.data)
       await setMembers([])
       setMembers(members)
+      setDisplayMembers(members)
     })
   }
 
   function filterMembers(e: any) {
-    const filteredMembers = fAPI.filterMembers(e.target.value)
-    setMembers(filteredMembers)
+    const search = e.target.value
+    const filteredMembers = []
+    for (let i = 0 ; i < members.length ; i++) {
+        const {phone, email, first_name, last_name} = members[i]
+        if (phone.includes(search) || email.includes(search) || first_name.includes(search) || last_name.includes(search)) {
+            filteredMembers.push(members[i])
+        }
+    }
+    setDisplayMembers(filteredMembers)
   }
 
   async function deleteMember(id:number) {
@@ -51,10 +57,8 @@ const App = () => {
     }
     await setMembers([])
     setMembers(members)
+    setDisplayMembers(members)
     })
-    // const allMembers = API.deleteMember(id)
-    // await setMembers([])
-    // setMembers(allMembers)
   }
 
   return (
@@ -66,7 +70,7 @@ const App = () => {
           <Form.Control placeholder="Search name, email, phone" onChange={filterMembers}/>
         </div>
       </div>
-      <Members members={members} deleteMember={deleteMember}/>
+      <Members members={displayMembers} deleteMember={deleteMember}/>
     </Container>
   );
 };
