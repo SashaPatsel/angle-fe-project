@@ -18,13 +18,14 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
         deleteMember(id)
     }
 
-    async function sortMembers() {
-
+    async function sortMembers(arg: string) {
+        
         const sortedMembers = members.sort(function (a: any, b: any) {
+
             console.log("A", a)
             console.log("B", b)
-                if (a.first_name < b.first_name) { return -1; }
-                if (a.first_name > b.first_name) { return 1; }
+                if (a[arg] < b[arg]) { return -1; }
+                if (a[arg] > b[arg]) { return 1; }
                 return 0;
             })
             // = members.sort((a:any, b:any) => a.firstname.localeCompare(b.firstname))
@@ -43,7 +44,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                 <div>
                                     Name
                                 </div>
-                                <div onClick={sortMembers}>
+                                <div onClick={() => sortMembers("first_name")}>
                                     &#9650;
                                     {/* &#9660; */}
                                 </div>
@@ -54,7 +55,7 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                 <div>
                                     email
                                 </div>
-                                <div>
+                                <div onClick={() => sortMembers("email")}>
                                     &#9650;
                                 </div>
                             </div>
@@ -64,9 +65,9 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                 <div>
                                     phone
                                 </div>
-                                <div>
+                                {/* <div onClick={() => sortMembers("name")}>
                                     &#9650;
-                                </div>
+                                </div> */}
                             </div>
                         </th>
                         <th></th>
