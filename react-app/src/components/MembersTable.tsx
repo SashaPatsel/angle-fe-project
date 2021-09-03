@@ -53,8 +53,9 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                     Name
                                 </div>
                                 <div onClick={() => sortMembers("first_name")}>
-                                &#9660;
-                                    {/* &#9650;*/}
+                                    {sortedColumns.first_name === "descending" ? <>&#9660;</>
+                                    : <>&#9650;</>}
+                                
                                 </div>
                             </div>
                         </th>
@@ -64,7 +65,8 @@ const MembersTable = ({ members, deleteMember }: { members: any; deleteMember: a
                                     email
                                 </div>
                                 <div onClick={() => sortMembers("email")}>
-                                &#9660;
+                                {sortedColumns.email === "descending" ? <>&#9660;</>
+                                    : <>&#9650;</>}
                                 </div>
                             </div>
                         </th>
